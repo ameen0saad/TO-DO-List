@@ -1,5 +1,5 @@
-const APILogIn = 'http://127.0.0.1:3000/api/v1/users/login';
-const APIBase = 'http://127.0.0.1:3000/api/v1/users';
+const APILogIn = 'https://to-do-list-production-5d26.up.railway.app/api/v1/users/login';
+const APIBase = 'https://to-do-list-production-5d26.up.railway.app/api/v1/users';
 
 const login = async (data) => {
   try {
@@ -132,5 +132,6 @@ loginButton.addEventListener('click', async (e) => {
 const signWithGoogleButton = document.getElementById('SigninOauth');
 
 signWithGoogleButton.addEventListener('click', () => {
-  window.location.href = 'http://127.0.0.1:3000/api/v1/users/auth/google';
+  window.location.href =
+    'https://to-do-list-production-5d26.up.railway.app/api/v1/users/auth/google';
 });

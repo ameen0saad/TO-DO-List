@@ -1,6 +1,6 @@
-const APITasks = 'http://127.0.0.1:3000/api/v1/tasks';
-const APIDeleteTasks = 'http://127.0.0.1:3000/api/v1/tasks';
-const APILogout = 'http://127.0.0.1:3000/api/v1/users/logout';
+const APITasks = 'https://to-do-list-production-5d26.up.railway.app/api/v1/tasks';
+const APIDeleteTasks = 'https://to-do-list-production-5d26.up.railway.app/api/v1/tasks';
+const APILogout = 'https://to-do-list-production-5d26.up.railway.app/api/v1/users/logout';
 
 const card = document.getElementById('card-continer');
 
@@ -527,7 +527,7 @@ const loadAllTasksForCounter = async () => {
 };
 
 // User API endpoint
-const APIUser = 'http://127.0.0.1:3000/api/v1/users/me';
+const APIUser = 'https://to-do-list-production-5d26.up.railway.app/api/v1/users/me';
 
 // Function to get user data
 const getUserData = async () => {

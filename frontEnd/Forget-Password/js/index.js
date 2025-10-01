@@ -1,6 +1,8 @@
-const APIForgetPassword = 'http://127.0.0.1:3000/api/v1/users/forgetPassword';
-const APIVerifyOTP = 'http://127.0.0.1:3000/api/v1/users/verifyOTP';
-const APIResetPassword = 'http://127.0.0.1:3000/api/v1/users/resetPassword';
+const APIForgetPassword =
+  'https://to-do-list-production-5d26.up.railway.app/api/v1/users/forgetPassword';
+const APIVerifyOTP = 'https://to-do-list-production-5d26.up.railway.app/api/v1/users/verifyOTP';
+const APIResetPassword =
+  'https://to-do-list-production-5d26.up.railway.app/api/v1/users/resetPassword';
 
 // ====== Toast Function ======
 const loginToast = document.getElementById('loginToast');
