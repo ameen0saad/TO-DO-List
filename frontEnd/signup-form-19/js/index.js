@@ -96,3 +96,10 @@ const signinButton = document.getElementById('sign-in');
 signinButton.addEventListener('click', (e) => {
   window.location.href = '/frontEnd/Login_v1/index.html';
 });
+
+const signWithGoogleButton = document.getElementById('SigninOauth');
+
+signWithGoogleButton.addEventListener('click', () => {
+  window.location.href =
+    'https://to-do-list-production-5d26.up.railway.app/api/v1/users/auth/google';
+});
