@@ -13,6 +13,7 @@ import { xss } from 'express-xss-sanitizer';
 import AppError from './utils/AppError.js';
 const app = express();
 
+app.set('trust proxy', true);
 app.use(helmet());
 app.use(express.json({ limit: '10kb' }));
 

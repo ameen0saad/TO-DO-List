@@ -92,11 +92,6 @@ signupButton.addEventListener('click', async (e) => {
   }
 });
 
-const signinButton = document.getElementById('sign-in');
-signinButton.addEventListener('click', (e) => {
-  window.location.href = '/Login_v1/index.html';
-});
-
 const signWithGoogleButton = document.getElementById('SigninOauth');
 
 signWithGoogleButton.addEventListener('click', () => {
