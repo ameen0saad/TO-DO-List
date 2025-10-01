@@ -16,7 +16,8 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: 'http://127.0.0.1:3000/api/v1/users/auth/google/callback',
+      callbackURL:
+        'https://to-do-list-production-5d26.up.railway.app/api/v1/users/auth/google/callback',
       passReqToCallback: true,
     },
     async (request, accessToken, refreshToken, profile, done) => {
