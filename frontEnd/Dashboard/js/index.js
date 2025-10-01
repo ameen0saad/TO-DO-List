@@ -354,7 +354,7 @@ const showUpdateModal = (task) => {
                             <option value="inprogress" ${
                               task.status === 'inprogress' ? 'selected' : ''
                             }>In Progress</option>
-                            <option value="completed" ${
+                            <option value="done" ${
                               task.status === 'Done' ? 'selected' : ''
                             }>Done</option>
                         </select>
