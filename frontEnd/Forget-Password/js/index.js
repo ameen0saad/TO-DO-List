@@ -120,7 +120,7 @@ if (continueButton && emailInput) {
       await forgetPassword(email);
       showToast('✅ OTP sent to your email!', 'success');
       setTimeout(() => {
-        window.location.href = '/frontEnd/Forget-Password/otp.html';
+        window.location.href = '/Forget-Password/otp.html';
       }, 1500);
     } catch (error) {
       console.error('Continue error:', error);
@@ -150,7 +150,7 @@ if (verifyButton && otpInput) {
       await verifyOtp(otp);
       showToast('✅ OTP verified successfully!', 'success');
       setTimeout(() => {
-        window.location.href = '/frontEnd/Forget-Password/resetPassword.html';
+        window.location.href = '/Forget-Password/resetPassword.html';
       }, 1500);
     } catch (error) {
       console.error('Verification error:', error);
@@ -187,7 +187,7 @@ if (resetButton && passwordInput && confirmPasswordInput) {
       await resetPassword(password, confirmPassword);
       showToast('✅ Password reset successfully!', 'success');
       setTimeout(() => {
-        window.location.href = '/frontEnd/Dashboard/index.html';
+        window.location.href = '/Dashboard/index.html';
       }, 1500);
     } catch (error) {
       console.error('Reset password error:', error);

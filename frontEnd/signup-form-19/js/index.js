@@ -53,7 +53,7 @@ function showVerificationModal(email) {
 
 closeModalBtn.addEventListener('click', () => {
   modal.style.display = 'none';
-  window.location.href = '/frontEnd/Login_v1/index.html';
+  window.location.href = '/Login_v1/index.html';
 });
 
 // ===== Signup Event =====
@@ -94,7 +94,7 @@ signupButton.addEventListener('click', async (e) => {
 
 const signinButton = document.getElementById('sign-in');
 signinButton.addEventListener('click', (e) => {
-  window.location.href = '/frontEnd/Login_v1/index.html';
+  window.location.href = '/Login_v1/index.html';
 });
 
 const signWithGoogleButton = document.getElementById('SigninOauth');

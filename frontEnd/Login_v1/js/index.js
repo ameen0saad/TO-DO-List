@@ -67,7 +67,7 @@ const handleOAuthCallback = async () => {
 
     setTimeout(() => {
       loginToast.classList.remove('show');
-      window.location.href = '/frontEnd/Dashboard/index.html';
+      window.location.href = '/Dashboard/index.html';
     }, 1500);
   }
 };
@@ -115,7 +115,7 @@ loginButton.addEventListener('click', async (e) => {
     }, 5000);
 
     setTimeout(() => {
-      window.location.href = '/frontEnd/Dashboard/index.html';
+      window.location.href = '/Dashboard/index.html';
     }, 1500);
   } catch (error) {
     loginToast.textContent = '❌ ' + error.message;

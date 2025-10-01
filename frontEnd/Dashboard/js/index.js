@@ -842,7 +842,7 @@ logoutButton.addEventListener('click', async () => {
     await logout();
 
     // Redirect to login page after successful logout
-    window.location.href = '/frontEnd/Login_v1/index.html';
+    window.location.href = '/Login_v1/index.html';
   } catch (error) {
     // Re-enable button on error
     logoutButton.disabled = false;
