@@ -18,7 +18,7 @@ app.use(helmet());
 app.use(express.json({ limit: '10kb' }));
 
 const limiter = rateLimit({
-  max: 1000,
+  max: 1001,
   windowMs: 60 * 60 * 1000,
   message: 'Too many requests from this IP, please try again later.',
 });
@@ -26,6 +26,7 @@ app.use('/api', limiter);
 app.use(xss());
 app.use(hpp({ whitelist: ['sort', 'limit', 'page', 'fields', 'search', 'include'] }));
 app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
+
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
