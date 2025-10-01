@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Your TO-DO List App!</title>
+    <style>
+      /* Reset styles for email compatibility */
+      body,
+      table,
+      td,
+      a {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+      }
+      table,
+      td {
+        mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt;
+        border-collapse: collapse;
+      }
+      img {
+        -ms-interpolation-mode: bicubic;
+        border: 0;
+        height: auto;
+        line-height: 100%;
+        outline: none;
+        text-decoration: none;
+      }
+
+      /* Main styles */
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f7fa;
+        color: #333333;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+      .header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 30px 20px;
+        text-align: center;
+        color: white;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      .app-icon {
+        font-size: 48px;
+        margin-bottom: 15px;
+      }
+      .content {
+        padding: 30px;
+      }
+      .welcome-text {
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+      .highlight {
+        background-color: #f0f4ff;
+        padding: 15px;
+        border-left: 4px solid #667eea;
+        margin: 20px 0;
+        border-radius: 0 4px 4px 0;
+      }
+      .cta-button {
+        display: inline-block;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        text-decoration: none;
+        padding: 12px 30px;
+        border-radius: 5px;
+        font-weight: bold;
+        margin: 20px 0;
+        text-align: center;
+        font-size: 16px;
+      }
+      .features {
+        margin: 30px 0;
+      }
+      .feature-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 20px;
+      }
+      .feature-icon {
+        background-color: #eef2ff;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        color: #667eea;
+        font-weight: bold;
+        flex-shrink: 0;
+      }
+      .feature-content h3 {
+        margin: 0 0 5px 0;
+        color: #4a5568;
+      }
+      .feature-content p {
+        margin: 0;
+        font-size: 14px;
+        color: #718096;
+      }
+      .getting-started {
+        background-color: #f8fafc;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 25px 0;
+      }
+      .getting-started h2 {
+        color: #4a5568;
+        margin-top: 0;
+      }
+      .footer {
+        background-color: #2d3748;
+        padding: 25px 20px;
+        text-align: center;
+        font-size: 14px;
+        color: #cbd5e0;
+      }
+      .social-links {
+        margin: 15px 0;
+      }
+      .social-links a {
+        display: inline-block;
+        margin: 0 10px;
+        color: #cbd5e0;
+        text-decoration: none;
+      }
+      .unsubscribe {
+        font-size: 12px;
+        margin-top: 15px;
+        color: #a0aec0;
+      }
+      .checklist {
+        list-style-type: none;
+        padding: 0;
+      }
+      .checklist li {
+        padding: 8px 0;
+        padding-left: 25px;
+        position: relative;
+      }
+      .checklist li:before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: #48bb78;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <center>
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px">
+        <tr>
+          <td align="center" bgcolor="#f5f7fa" style="padding: 20px">
+            <!-- Container -->
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="container">
+              <!-- Header -->
+              <tr>
+                <td align="center" class="header">
+                  <div class="app-icon">✓</div>
+                  <h1>Welcome to Your TO-DO List!</h1>
+                  <p style="margin: 10px 0 0 0; opacity: 0.9">Start organizing your tasks today</p>
+                </td>
+              </tr>
+
+              <!-- Content -->
+              <tr>
+                <td class="content">
+                  <p class="welcome-text">Hello <strong>{{USER_NAME}}</strong>,</p>
+                  <p class="welcome-text">
+                    Welcome to your new TO-DO list application! We're thrilled to help you get
+                    organized and boost your productivity.
+                  </p>
+
+                  <div class="highlight">
+                    <strong>Your account is ready to use!</strong> You can now start creating tasks,
+                    setting deadlines, and tracking your progress.
+                  </div>
+
+                  <div class="features">
+                    <div class="feature-item">
+                      <div class="feature-icon">✓</div>
+                      <div class="feature-content">
+                        <h3>Create & Organize Tasks</h3>
+                        <p>
+                          Add tasks with due dates, priorities, and categories to keep everything
+                          organized.
+                        </p>
+                      </div>
+                    </div>
+                    <div class="feature-item">
+                      <div class="feature-icon">📱</div>
+                      <div class="feature-content">
+                        <h3>Access Anywhere</h3>
+                        <p>Your tasks sync across all your devices so you're always up to date.</p>
+                      </div>
+                    </div>
+                    <div class="feature-item">
+                      <div class="feature-icon">🔔</div>
+                      <div class="feature-content">
+                        <h3>Smart Reminders</h3>
+                        <p>Get notifications for upcoming deadlines and important tasks.</p>
+                      </div>
+                    </div>
+                    <div class="feature-item">
+                      <div class="feature-icon">📊</div>
+                      <div class="feature-content">
+                        <h3>Progress Tracking</h3>
+                        <p>Visualize your productivity with completion statistics and insights.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="getting-started">
+                    <h2>Quick Start Guide</h2>
+                    <ul class="checklist">
+                      <li>Add your first task using the "+" button</li>
+                      <li>Organize tasks into projects or categories</li>
+                      <li>Set due dates and priority levels</li>
+                      <li>Check off completed tasks to track progress</li>
+                      <li>Explore settings to customize your experience</li>
+                    </ul>
+                  </div>
+
+                  <div style="text-align: center">
+                    <a href="{{URL}}" class="cta-button">Start Adding Tasks Now</a>
+                  </div>
+
+                  <p class="welcome-text">
+                    If you have any questions or need help getting started, check out our
+                    <a href="#" style="color: #667eea">help center</a> or reply to this email.
+                  </p>
+
+                  <p class="welcome-text">
+                    Happy organizing!<br />
+                    <strong>The TO-DO List Team</strong>
+                  </p>
+                </td>
+              </tr>
+
+              <!-- Footer -->
+              <tr>
+                <td class="footer">
+                  <p>Stay connected with us:</p>
+                  <div class="social-links">
+                    <a href="#">Twitter</a> | <a href="#">Facebook</a> |
+                    <a href="#">Instagram</a>
+                  </div>
+                  <p>TO-DO List App &copy; {{YEAR}}. All rights reserved.</p>
+                  <p class="unsubscribe">
+                    <a href="#" style="color: #a0aec0">Unsubscribe</a> from these emails.
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </center>
+  </body>
+</html>

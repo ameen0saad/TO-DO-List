@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Sign Up</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+
+      .modal-content {
+        background: #fff;
+        padding: 30px 40px;
+        border-radius: 12px;
+        text-align: center;
+        max-width: 400px;
+        width: 90%;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+        animation: popup 0.3s ease;
+      }
+
+      .modal-content h2 {
+        margin-bottom: 15px;
+        color: #155724;
+      }
+
+      .modal-content p {
+        margin-bottom: 20px;
+        color: #333;
+        font-size: 16px;
+      }
+
+      .modal-content button {
+        padding: 10px 20px;
+        border: none;
+        background: #155724;
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      .modal-content button:hover {
+        background: #0d3e1e;
+      }
+
+      @keyframes popup {
+        from {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body class="img" style="background-image: url(images/bg.jpg)">
+    <div id="alertBox" class="alert" style="display: none"></div>
+    <section class="ftco-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6 text-center mb-5">
+            <h2 class="heading-section">Sign Up</h2>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-md-7 col-lg-5">
+            <div class="login-wrap">
+              <h3 class="text-center mb-4">Create Your Account</h3>
+              <form action="#" class="signup-form">
+                <div class="form-group mb-3">
+                  <label class="label" for="name">Full Name</label>
+                  <input type="text" class="form-control" id="name" placeholder="John Doe" />
+                  <span class="icon fa fa-user-o"></span>
+                </div>
+                <div class="form-group mb-3">
+                  <label class="label" for="email">Email Address</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="email"
+                    placeholder="johndoe@gmail.com"
+                  />
+                  <span class="icon fa fa-paper-plane-o"></span>
+                </div>
+                <div class="form-group mb-3">
+                  <label class="label" for="password">Password</label>
+                  <input
+                    id="password"
+                    type="password"
+                    class="form-control"
+                    placeholder="Password"
+                  />
+                  <span
+                    toggle="#password"
+                    class="fa fa-fw fa-eye field-icon toggle-password"
+                  ></span>
+                  <span class="icon fa fa-lock"></span>
+                </div>
+                <div class="form-group mb-3">
+                  <label class="label" for="password-confirm">Password confirm</label>
+                  <input
+                    id="password-confirm"
+                    type="password"
+                    class="form-control"
+                    placeholder="Password"
+                  />
+                  <span
+                    toggle="#password-confirm"
+                    class="fa fa-fw fa-eye field-icon toggle-password"
+                  ></span>
+                  <span class="icon fa fa-lock"></span>
+                </div>
+                <div class="form-group">
+                  <button
+                    type="submit"
+                    class="form-control btn btn-primary submit px-3"
+                    id="signup"
+                  >
+                    Sign Up
+                  </button>
+                </div>
+              </form>
+              <p>
+                I'm already a member!
+                <a id="sign-in" data-toggle="tab" href="/frontEnd/Login_v1/index.html">Sign In</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Modal -->
+    <div id="verificationModal" class="modal-overlay">
+      <div class="modal-content">
+        <h2>Account Created 🎉</h2>
+        <p id="verificationMessage"></p>
+        <button id="closeModal">OK</button>
+      </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

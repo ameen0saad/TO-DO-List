@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum Status {
+  PENDING 
+  INPROGRESS
+  DONE
+}
+
+model User {
+  id String @id @default(uuid())
+  email String @unique 
+  name String
+  password String? 
+  passwordChangedAt DateTime?
+  verified Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime? @updatedAt
+
+  task Task[]
+  otpDetails Otp[]
+  vericationToken VerificationToken[]
+}
+
+model Task {
+  id String @id @default(uuid())
+  title String
+  description String?
+  priority Priority @default(LOW) 
+  status Status @default(PENDING)
+  completed Boolean @default(false) 
+  dueDate DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime? @updatedAt
+
+  userId String 
+  user User @relation(fields: [userId],references: [id] ,onDelete: Cascade)
+  @@index([priority])
+  @@index([completed])
+  @@index([dueDate])
+
+}
+
+model Otp {
+  id String @id @default(uuid()) 
+  otp String 
+  otpExpiry DateTime
+  createdAt DateTime @default(now())
+
+  userId String 
+  user User @relation(fields: [userId],references: [id],onDelete: Cascade)
+
+  @@index([otpExpiry])
+}
+
+model VerificationToken {
+  id String @id @default(uuid())
+  token String 
+  tokenExpiry DateTime 
+  createdAt DateTime @default(now())
+
+  userId String 
+  user User @relation(fields: [userId],references: [id],onDelete: Cascade)
+  @@index([tokenExpiry])
+}
