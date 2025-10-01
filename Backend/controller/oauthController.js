@@ -62,6 +62,6 @@ export const googleAuthCallback = (req, res, next) => {
 
     res.cookie('jwt', token, cookieOption);
 
-    res.redirect(`http://127.0.0.1:5500/frontEnd/Dashboard/index.html`);
+    res.redirect(`https://to-do-list-q.netlify.app/Dashboard/index.html`);
   })(req, res, next);
 };

@@ -79,20 +79,20 @@ const signInfooter = document.getElementById('signIn');
 const createAccount = document.getElementById('createAccount');
 
 startButton.addEventListener('click', () => {
-  window.location.href = '/frontEnd/signup-form-19/index.html';
+  window.location.href = '/signup-form-19/index.html';
 });
 
 getStartedBtn.addEventListener('click', () => {
-  window.location.href = '/frontEnd/signup-form-19/index.html';
+  window.location.href = '/signup-form-19/index.html';
 });
 
 createAccount.addEventListener('click', () => {
-  window.location.href = '/frontEnd/signup-form-19/index.html';
+  window.location.href = '/signup-form-19/index.html';
 });
 
 signInBtn.addEventListener('click', () => {
-  window.location.href = '/frontEnd/Login_v1/index.html';
+  window.location.href = '/Login_v1/index.html';
 });
 signInfooter.addEventListener('click', () => {
-  window.location.href = '/frontEnd/Login_v1/index.html';
+  window.location.href = '/Login_v1/index.html';
 });
