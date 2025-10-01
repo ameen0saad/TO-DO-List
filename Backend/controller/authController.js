@@ -25,6 +25,7 @@ const createSendToken = (user, statusCode, res) => {
     expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
     httpOnly: true,
     secure: process.env.NODE_ENV == 'production',
+    sameSite: 'none',
   };
 
   res.cookie('jwt', token, cookieOption);
@@ -230,6 +231,7 @@ export const forgetPassword = async (req, res, next) => {
     expires: new Date(Date.now() + 10 * 60 * 1000),
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
+    sameSite: 'none',
   };
 
   res.cookie('otp_session', token, cookieOption);
@@ -276,6 +278,7 @@ export const verifyOtp = async (req, res, next) => {
     expires: new Date(Date.now() + 15 * 60 * 1000),
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
+    sameSite: 'none',
   };
 
   res.cookie('reset_session', autToken, cookieOption);
