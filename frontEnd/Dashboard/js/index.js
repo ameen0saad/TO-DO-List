@@ -234,7 +234,7 @@ const showCreateModal = () => {
                         <select id="create-status" name="status">
                             <option value="pending" selected>Pending</option>
                             <option value="inprogress">In Progress</option>
-                            <option value="completed">Completed</option>
+                            <option value="Done">Done</option>
                         </select>
                     </div>
                     
@@ -355,8 +355,8 @@ const showUpdateModal = (task) => {
                               task.status === 'inprogress' ? 'selected' : ''
                             }>In Progress</option>
                             <option value="completed" ${
-                              task.status === 'completed' ? 'selected' : ''
-                            }>Completed</option>
+                              task.status === 'Done' ? 'selected' : ''
+                            }>Done</option>
                         </select>
                     </div>
                     
