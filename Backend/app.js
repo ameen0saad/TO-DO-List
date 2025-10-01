@@ -9,6 +9,8 @@ import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import { xss } from 'express-xss-sanitizer';
+
+import AppError from './utils/AppError.js';
 const app = express();
 
 app.use(helmet());
