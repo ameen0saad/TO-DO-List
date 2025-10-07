@@ -1091,5 +1091,5 @@ function showConfirmationDialog(message) {
 
 const backToTasks = document.getElementById('backToTasksBtn');
 backToTasks.addEventListener('click', () => {
-  window.location.href = 'Dashboard/index.html';
+  window.location.href = 'index.html';
 });
