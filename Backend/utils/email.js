@@ -1,7 +1,13 @@
 import nodemailer from 'nodemailer';
+import SibApiV3Sdk from 'sib-api-v3-sdk';
 import fs from 'fs/promises';
 import { __dirname } from './path.js';
 import path from 'path';
+
+const defaulClient = SibApiV3Sdk.ApiClient.instance;
+const apiKey = defaulClient.authentications['api-key'];
+apiKey.apiKey = process.env.BREVO_API_KEY;
+const tranEmailApi = new SibApiV3Sdk.TransactionalEmailsApi();
 
 const loadTemplate = async (templatePath, replacements) => {
   try {
@@ -11,6 +17,7 @@ const loadTemplate = async (templatePath, replacements) => {
     );
     return template;
   } catch (error) {
+    console.log(error);
     throw error;
   }
 };
@@ -19,35 +26,30 @@ class Email {
     this.to = user.email;
     this.name = user.name;
     this.url = url;
-    this.from = `Task Manager < ${process.env.EMAIL_FROM}`;
-  }
-  newTransport() {
-    if (process.env.NODE_ENV == 'production')
-      return nodemailer.createTransport({
-        host: process.env.TURBO_EMAIL_HOST,
-        port: process.env.EMAIL_PORT,
-        auth: {
-          user: process.env.TURBO_USERNAME,
-          pass: process.env.TURBO_PASSWORD,
-        },
-      });
-    return nodemailer.createTransport({
-      host: process.env.EMAIL_HOST,
-      port: process.env.EMAIL_PORT,
-      auth: {
-        user: process.env.EMAIL_USERNAME,
-        pass: process.env.EMAIL_PASSWORD,
-      },
-    });
-  }
-  async send(template, subject) {
-    const mailOptions = {
-      from: this.from,
-      to: this.to,
-      subject,
-      html: template,
+    this.from = `${process.env.EMAIL_FROM}`;
+    this.sender = {
+      email: process.env.EMAIL_FROM,
+      name: 'Ameen',
     };
-    await this.newTransport().sendMail(mailOptions);
+    this.receivers = [
+      {
+        email: user.email,
+        name: user.name,
+      },
+    ];
+  }
+
+  async send(template, subject) {
+    try {
+      await tranEmailApi.sendTransacEmail({
+        sender: this.sender,
+        to: this.receivers,
+        subject,
+        htmlContent: template,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
   async sendWelcome() {
     const templatePath = path.join(__dirname, '../public/html/email/welcome.html');

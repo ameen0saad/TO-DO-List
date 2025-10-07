@@ -1,15 +1,17 @@
 import express from 'express';
-import taskRoutes from './routes/taskRoutes.js';
-import userRoutes from './routes/userRoutes.js';
 import morgan from 'morgan';
 import cors from 'cors';
-import globalErrorHandler from './controller/errorContoller.js';
 import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import { xss } from 'express-xss-sanitizer';
 
+import taskRoutes from './routes/taskRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import teamRoutes from './routes/teamRoutes.js';
+import teamTaskRoutes from './routes/teamTaskRoutes.js';
+import globalErrorHandler from './controller/errorContoller.js';
 import AppError from './utils/AppError.js';
 const app = express();
 
@@ -34,13 +36,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: [process.env.CLIENT_URL, 'http://127.0.0.1:5500'],
     credentials: true,
   })
 );
 
 app.use('/api/v1/tasks', taskRoutes);
 app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/teams', teamRoutes);
+app.use('/api/v1/teamTasks', teamTaskRoutes);
 app.all('*split', (req, res, next) => {
   return next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });

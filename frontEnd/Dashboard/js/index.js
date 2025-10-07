@@ -854,3 +854,15 @@ logoutButton.addEventListener('click', async () => {
     console.error('Logout failed:', error);
   }
 });
+
+// Add this to your existing JavaScript code
+
+// Team Management Button Functionality
+const teamManagementBtn = document.getElementById('teamManagementBtn');
+
+if (teamManagementBtn) {
+  teamManagementBtn.addEventListener('click', () => {
+    // Navigate to the team management page
+    window.location.href = 'teams.html';
+  });
+}

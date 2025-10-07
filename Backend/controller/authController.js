@@ -3,9 +3,11 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import validator from 'validator';
 
+import { __dirname } from '../utils/path.js';
 import crypto from 'crypto';
 import AppError from '../utils/AppError.js';
 import Email from '../utils/email.js';
+import path from 'path';
 
 const prisma = new PrismaClient();
 
@@ -65,7 +67,7 @@ export const signUp = async (req, res, next) => {
       password: hashPass,
     },
   });
-  const VerificationToken = await prisma.VerificationToken.create({
+  const VerificationToken = await prisma.verificationToken.create({
     data: {
       token: crypto.randomBytes(32).toString('hex'),
       userId: newUser.id,
@@ -85,6 +87,7 @@ export const signUp = async (req, res, next) => {
 // TODO : Log in
 export const login = async (req, res, next) => {
   const { email, password } = req.body;
+
   if (!validator.isEmail(email)) return next(new AppError('Please provide a valid email', 400));
 
   if (!email || !password) return next(new AppError('Please provide email and password', 400));
@@ -100,9 +103,12 @@ export const login = async (req, res, next) => {
     });
 
     if (!VerificationToken || VerificationToken.tokenExpiry < new Date()) {
-      await prisma.verficationToken.create({
-        userId: user._id,
-        token: crypto.randomBytes(32).toString('hex'),
+      VerificationToken = await prisma.verificationToken.create({
+        data: {
+          userId: user.id,
+          token: crypto.randomBytes(32).toString('hex'),
+          tokenExpiry: new Date(Date.now() + 24 * 60 * 60 * 1000),
+        },
       });
     }
     const verificationUrl = `${req.protocol}://${req.get('host')}/api/v1/users/${
@@ -163,7 +169,7 @@ export const protect = async (req, res, next) => {
 export const myProfile = async (req, res, next) => {
   const user = await prisma.user.findUnique({
     where: { id: req.user.id },
-    select: { name: true },
+    select: { name: true, email: true, id: true },
   });
   res.status(200).json({
     status: 'Success',
@@ -335,24 +341,22 @@ export const resetPassword = async (req, res, next) => {
 // TODO : verify Email
 export const verifyEmail = async (req, res, next) => {
   const userId = req.params.id;
+  const token = req.params.token;
+
   const user = await prisma.user.findUnique({ where: { id: userId } });
   if (!user) return next(new AppError('User not found', 404));
 
-  const token = req.params.token;
-  const VerificationToken = await prisma.VerificationToken.findFirst({ where: { token, userId } });
+  const VerificationToken = await prisma.verificationToken.findFirst({ where: { token, userId } });
 
   if (!VerificationToken) return next(new AppError('Invalid Link or expired', 400));
 
   if (VerificationToken.tokenExpiry < new Date())
     return next(new AppError('Token has expired', 400));
   await prisma.user.update({ where: { id: userId }, data: { verified: true } });
-  await prisma.VerificationToken.deleteMany({ where: { userId } });
+  await prisma.verificationToken.deleteMany({ where: { userId } });
 
   const url = `${req.protocol}://${req.get('host')}/myProfile`;
   await new Email(user, url).sendWelcome();
 
-  res.status(200).json({
-    status: 'Success',
-    message: 'Email verified successfully',
-  });
+  res.sendFile(path.join(__dirname, '../public/html/email/verifyEmailSuccess.html'));
 };

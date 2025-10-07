@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team Management - To-Do List</title>
+    <link rel="stylesheet" href="css/teams.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+      <div class="user-info">
+        <div id="userName" class="user-name">Loading...</div>
+        <button class="back-to-tasks-btn" id="backToTasksBtn">Back to Tasks</button>
+        <button class="log-out-btn" id="logoutBtn">Logout</button>
+      </div>
+    </nav>
+
+    <!-- Team Dashboard -->
+    <div class="team-dashboard">
+      <div class="dashboard-tabs">
+        <button class="tab-btn active" data-tab="my-teams">My Teams</button>
+        <button class="tab-btn" data-tab="create-team">Create Team</button>
+      </div>
+
+      <!-- My Teams Tab -->
+      <div id="my-teams" class="tab-content active">
+        <div class="teams-grid" id="teamsContainer">
+          <!-- Teams will be loaded here dynamically -->
+        </div>
+      </div>
+
+      <!-- Create Team Tab -->
+      <div id="create-team" class="tab-content">
+        <div class="create-team-form">
+          <h2 class="section-title">Create New Team</h2>
+          <form id="createTeamForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="teamName">Team Name</label>
+                <input
+                  type="text"
+                  id="teamName"
+                  name="name"
+                  required
+                  placeholder="Enter team name"
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="teamDescription">Description</label>
+                <textarea
+                  id="teamDescription"
+                  name="description"
+                  placeholder="Enter team description"
+                ></textarea>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group members-input-container">
+                <label for="teamMembers">Add Members (by email)</label>
+                <input type="email" id="teamMembers" placeholder="Enter email and press Enter" />
+                <div class="members-tags" id="membersTags">
+                  <!-- Member tags will be added here -->
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="submit-btn">Create Team</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Team Details View (initially hidden) -->
+      <div id="team-details-view" class="tab-content">
+        <!-- Team details will be loaded here dynamically -->
+      </div>
+    </div>
+
+    <!-- Team Task Modal (hidden by default) -->
+    <div id="teamTaskModal" class="update-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="teamTaskModalTitle">Create Team Task</h2>
+          <button class="close-modal">&times;</button>
+        </div>
+        <form id="teamTaskForm" class="update-form">
+          <div class="form-group">
+            <label for="teamTaskTitle">Title:</label>
+            <input
+              type="text"
+              id="teamTaskTitle"
+              name="title"
+              placeholder="Enter task title"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="teamTaskDescription">Description:</label>
+            <textarea
+              id="teamTaskDescription"
+              name="description"
+              placeholder="Enter task description"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="teamTaskPriority">Priority:</label>
+            <select id="teamTaskPriority" name="priority">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="teamTaskStatus">Status:</label>
+            <select id="teamTaskStatus" name="status">
+              <option value="pending" selected>Pending</option>
+              <option value="inprogress">In Progress</option>
+              <option value="Done">Done</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="teamTaskDueDate">Due Date:</label>
+            <input type="date" id="teamTaskDueDate" name="dueDate" />
+          </div>
+
+          <div class="form-buttons">
+            <button type="button" class="cancel-btn">Cancel</button>
+            <button type="submit" class="save-btn">Create Task</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Delete Team Confirmation Modal -->
+    <div id="deleteTeamModal" class="update-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">Delete Team</h2>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Are you sure you want to delete this team? This action cannot be undone and all team
+            tasks will be permanently deleted.
+          </p>
+        </div>
+        <div class="form-buttons">
+          <button class="cancel-btn" id="cancelDeleteTeam">Cancel</button>
+          <button class="delete-btn" id="confirmDeleteTeam">Delete Team</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/teams.js"></script>
+  </body>
+</html>

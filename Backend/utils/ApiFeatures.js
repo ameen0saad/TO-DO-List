@@ -1,3 +1,5 @@
+import { Priority } from '@prisma/client';
+
 // utils/ApiFeatures.js
 class ApiFeatures {
   constructor(model, queryStr) {
@@ -12,13 +14,12 @@ class ApiFeatures {
     };
   }
 
-  filter(userId) {
+  filter(name, id) {
     const queryObject = { ...this.queryStr };
     const excludedFields = ['sort', 'limit', 'page', 'fields', 'search', 'include'];
     excludedFields.forEach((el) => delete queryObject[el]);
-
-    if (userId) {
-      queryObject.userId = userId;
+    if (name && id) {
+      queryObject[name] = id;
     }
 
     // Convert query string to Prisma where object
@@ -82,9 +83,6 @@ class ApiFeatures {
     return this;
   }
 
-  /**
-   * Field selection: ?fields=id,name,email
-   */
   select() {
     if (this.queryStr.fields) {
       const fields = this.queryStr.fields.split(',');

@@ -25,14 +25,16 @@ model User {
   email String @unique 
   name String
   password String? 
-  passwordChangedAt DateTime?
+  passwordChangedAt DateTime? 
   verified Boolean @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime? @updatedAt
 
   task Task[]
+  team Team[] @relation("Mempers")
+  ownerTeam Team[] @relation("OwnerTeam")
   otpDetails Otp[]
-  vericationToken VerificationToken[]
+  verificationTokens VerificationToken[]
 }
 
 model Task {
@@ -45,13 +47,42 @@ model Task {
   dueDate DateTime?
   createdAt DateTime @default(now())
   updatedAt DateTime? @updatedAt
-
   userId String 
+
   user User @relation(fields: [userId],references: [id] ,onDelete: Cascade)
   @@index([priority])
   @@index([completed])
   @@index([dueDate])
 
+}
+
+model Team {
+  id String @id @default(uuid()) 
+  name String 
+  description String? 
+  ownerId String 
+  createdAt DateTime @default(now())
+  updatedAt DateTime? @updatedAt
+
+  tasks TeamTask []
+  user User [] @relation("Mempers")
+  owner User @relation("OwnerTeam",fields: [ownerId],references: [id])
+}
+
+model TeamTask{
+  id String @id @default(uuid())
+  title String
+  description String?
+  priority Priority @default(LOW) 
+  status Status @default(PENDING)
+  completed Boolean @default(false) 
+  dueDate DateTime? 
+  createdAt DateTime @default(now())
+  updatedAt DateTime? @updatedAt 
+  teamId String 
+
+  team Team @relation(fields: [teamId],references: [id],onDelete: Cascade)
+  
 }
 
 model Otp {

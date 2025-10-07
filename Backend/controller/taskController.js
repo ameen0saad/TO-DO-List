@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 export const getAll = async (req, res, next) => {
   const features = new ApiFeatures(prisma.task, req.query)
-    .filter(req.user.id)
+    .filter('userId', req.user.id)
     .search()
     .sort()
     .select()
@@ -21,6 +21,9 @@ export const getAll = async (req, res, next) => {
 };
 
 export const getOne = async (req, res, next) => {
+  const team = await prisma.team.findUnique({ where: { id: req.params.teamId } });
+  if (!team) return next(new AppError('There is no team with that ID ', 404));
+
   const task = await prisma.task.findFirst({
     where: {
       id: req.params.id,

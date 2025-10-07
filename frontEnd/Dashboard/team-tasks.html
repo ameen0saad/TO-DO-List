@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team Tasks - To-Do List</title>
+    <link rel="stylesheet" href="css/team-tasks.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/teams.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+      <div class="user-info">
+        <div id="userName" class="user-name">Loading...</div>
+        <button class="back-to-tasks-btn" id="backToTasksBtn">Back to Tasks</button>
+        <button class="log-out-btn" id="logoutBtn">Logout</button>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="dashboard-container">
+      <div class="page-header">
+        <h1 class="page-title">Team Tasks</h1>
+        <button class="back-to-teams" id="backToTeams">← Back to Teams</button>
+      </div>
+
+      <!-- Team Header -->
+      <div class="team-header">
+        <div class="team-header-content">
+          <div class="team-info">
+            <h2 id="teamName">Team Name</h2>
+            <p class="team-description" id="teamDescription">Team description goes here</p>
+          </div>
+          <span class="team-role-badge" id="teamRole">Team Member</span>
+        </div>
+      </div>
+
+      <!-- Team Details Layout -->
+      <div class="team-details-layout">
+        <!-- Sidebar for Team Members -->
+        <div class="team-sidebar">
+          <div class="members-management">
+            <h3>Team Members</h3>
+
+            <div class="add-member-section" id="addMemberSection">
+              <div class="add-member-input-group">
+                <input
+                  type="email"
+                  class="add-member-input"
+                  id="addMemberInput"
+                  placeholder="Enter email address"
+                />
+                <button class="add-member-btn" id="addMemberBtn">Add</button>
+              </div>
+            </div>
+
+            <div class="members-list-sidebar" id="membersListSidebar">
+              <!-- Members will be populated here -->
+            </div>
+          </div>
+
+          <div class="team-management-actions" id="teamManagementActions">
+            <h4>Team Management</h4>
+            <button class="transfer-ownership-btn" id="transferOwnershipBtn">
+              Transfer Ownership
+            </button>
+          </div>
+
+          <div class="danger-zone-sidebar" id="dangerZoneSidebar">
+            <h4>Danger Zone</h4>
+            <p>Permanently delete this team and all its tasks. This action cannot be undone.</p>
+            <button class="delete-team-btn-sidebar" id="deleteTeamBtn">Delete Team</button>
+          </div>
+        </div>
+
+        <!-- Main Content for Team Tasks -->
+        <div class="team-main-content">
+          <div class="tasks-header">
+            <h3>Team Tasks</h3>
+            <button class="add-task-btn-main" id="addTeamTask">+ Create Task</button>
+          </div>
+
+          <div id="teamTasksContainer">
+            <div class="loading">Loading tasks...</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Team Task Modal -->
+    <div class="update-modal" id="teamTaskModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="teamTaskModalTitle">Create Team Task</h2>
+          <button type="button" class="close-modal">&times;</button>
+        </div>
+        <form id="teamTaskForm">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="teamTaskTitle">Task Title</label>
+              <input type="text" id="teamTaskTitle" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+              <label for="teamTaskDescription">Description</label>
+              <textarea id="teamTaskDescription" class="form-control" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="teamTaskPriority">Priority</label>
+              <select id="teamTaskPriority" class="form-control">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="teamTaskStatus">Status</label>
+              <select id="teamTaskStatus" class="form-control">
+                <option value="pending" selected>Pending</option>
+                <option value="inprogress">In Progress</option>
+                <option value="Done">Completed</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="teamTaskDueDate">Due Date</label>
+              <input type="date" id="teamTaskDueDate" class="form-control" />
+            </div>
+          </div>
+          <div class="form-buttons">
+            <button type="button" class="cancel-btn">Cancel</button>
+            <button type="submit" class="save-btn">Create Task</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Delete Team Modal -->
+    <div class="update-modal" id="deleteTeamModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">Delete Team</h2>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Are you sure you want to delete this team? This action cannot be undone and all team
+            tasks will be permanently deleted.
+          </p>
+        </div>
+        <div class="form-buttons">
+          <button class="cancel-btn" id="cancelDeleteTeam">Cancel</button>
+          <button class="save-btn" id="confirmDeleteTeam" style="background: #e74c3c">
+            Delete Team
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transfer Owner Modal -->
+    <div class="update-modal" id="transferOwnerModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">Transfer Ownership</h2>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>Select a team member to transfer ownership to:</p>
+          <div class="transfer-members-list" id="transferMembersList"></div>
+        </div>
+        <div class="form-buttons">
+          <button class="cancel-btn" id="cancelTransferOwner">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/team-task.js"></script>
+  </body>
+</html>
