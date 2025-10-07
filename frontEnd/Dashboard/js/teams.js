@@ -1146,7 +1146,6 @@ createTeamForm.addEventListener('submit', async (e) => {
 
     showMessage('Team created successfully!');
     createTeamForm.reset();
-    membersTagsContainer.innerHTML = '';
     teamMembers = [];
 
     // Reload teams
@@ -1166,7 +1165,7 @@ createTeamForm.addEventListener('submit', async (e) => {
 teamMembersInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
     e.preventDefault();
-    const email = teamMembersInput.value.trim().toLowerCase();
+    const email = teamMembersInput.value.trim();
 
     if (email && isValidEmail(email)) {
       if (!teamMembers.includes(email)) {
