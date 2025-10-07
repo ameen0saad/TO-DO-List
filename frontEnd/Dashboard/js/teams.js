@@ -1166,7 +1166,7 @@ createTeamForm.addEventListener('submit', async (e) => {
 teamMembersInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
     e.preventDefault();
-    const email = teamMembersInput.value.trim();
+    const email = teamMembersInput.value.trim().toLowerCase();
 
     if (email && isValidEmail(email)) {
       if (!teamMembers.includes(email)) {
